@@ -1,5 +1,7 @@
 # DNS Flusher Windows Service
 
+[![Build Status](https://dev.azure.com/Shaylen/Personal/_apis/build/status/DNSFlusherWindowsService?branchName=master)](https://dev.azure.com/Shaylen/Personal/_build/latest?definitionId=16&branchName=master)
+
 ## What's the purpose of this project?
 
 This aims to be a better solution to a perceived problem of having my dns cache poisoned
