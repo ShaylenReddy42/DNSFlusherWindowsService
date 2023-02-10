@@ -1,0 +1,13 @@
+@ECHO off
+
+CD "%~dp0"
+
+sc create "DNS Flusher" ^
+    binPath= "@CMAKE_SOURCE_DIR@/publish/DNSFlusherWindowsService.exe" ^
+    start= delayed-auto
+
+ECHO.
+ECHO NOTE: If access was denied, you need to run the script as Admin
+ECHO.
+
+PAUSE

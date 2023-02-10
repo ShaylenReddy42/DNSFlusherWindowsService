@@ -1,0 +1,67 @@
+trigger: 
+  branches:
+    include:
+      - "*"
+  tags:
+    include:
+      - "*"
+
+pool: Default
+
+variables:
+  workDir: '$(Build.SourcesDirectory)'
+
+steps:
+- checkout: self
+  fetchDepth: 0
+
+- task: UseDotNet@2
+  displayName: 'Use .NET SDK 7.0.102'
+  inputs:
+    version: 7.0.102
+    performMultiLevelLookup: true
+
+- task: CMake@1
+  displayName: 'Run CMake'
+  inputs:
+    cmakeArgs: -S . -B build
+    workingDirectory: '$(workDir)'
+
+- script: dotnet publish -c Release -r win-x64 -o "..\..\publish"
+  displayName: 'Publish Project'
+  workingDirectory: '$(workDir)\src\DNSFlusherWindowsService'
+
+- task: CopyFiles@2
+  displayName: 'Copy Script to Publish Directory'
+  inputs:
+    Contents: '$(workDir)\scripts\delete-service.cmd'
+    TargetFolder: '$(workDir)\publish'
+    flattenFolders: true
+
+- task: ArchiveFiles@2
+  displayName: 'Archive the Publish Directory'
+  inputs:
+    rootFolderOrFile: '$(workDir)\publish'
+    includeRootFolder: false
+    archiveType: zip
+    archiveFile: '$(Build.ArtifactStagingDirectory)\DNS Flusher Windows Service.zip'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Build Artifacts'
+
+- task: GitHubRelease@1
+  displayName: 'Create a New GitHub Release'
+  condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+  inputs:
+    gitHubConnection: 'ShaylenReddy42_OAuth'
+    repositoryName: '$(Build.Repository.Name)'
+    action: create
+    tagSource: userSpecifiedTag
+    tag: $(Build.SourceBranchName)
+    title: 'Release v$(Build.SourceBranchName)'
+    releaseNotesSource: filePath
+    releaseNotesFilePath: '$(Build.SourcesDirectory)/docs/releases/v$(Build.SourceBranchName).md'
+    assets: '$(Build.ArtifactStagingDirectory)/*'
+    addChangeLog: true
+    changeLogCompareToRelease: lastFullRelease
+    changeLogType: commitBased

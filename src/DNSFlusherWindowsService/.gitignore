@@ -1,0 +1,9 @@
+# Folders
+
+bin/
+obj/
+publish/
+
+# Files
+
+AssemblyInfo.cs
