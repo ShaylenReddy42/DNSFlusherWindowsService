@@ -39,7 +39,7 @@ public class Worker : BackgroundService
 
             _logger.LogInformation("{stdout}", output);
 
-            await Task.Delay(30 * 1000, stoppingToken);
+            await Task.Delay(30 * 1_000, stoppingToken);
         }
     }
 }

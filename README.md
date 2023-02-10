@@ -6,11 +6,12 @@ This aims to be a better solution to a perceived problem of having my dns cache 
 
 In the commit [kubernetes: move all resources to the default namespace](https://github.com/ShaylenReddy42/Seelans-Tyres/commit/f0aceb8d6d7c46f198f4e904ed6c29d32f6e7785) of my Seelan's Tyres project, I said this:
 
-```
-.. after watching john savill's video "how dns works", i suspected my dns was poisoned so i started flushing it often, then it got to a point where it seemed like it was being poisoned on a regular basis as my builds would hang, and when i flushed my dns, it would proceed
+  ".. after watching john savill's video "how dns works", i suspected my dns was poisoned so i started flushing it often, 
+  then it got to a point where it seemed like it was being poisoned on a regular basis as my builds would hang, 
+  and when i flushed my dns, it would proceed
 
-to solve this problem, i created a script to flush the dns, and created a task in task scheduler to execute that script every minute indefinitely
-```
+  to solve this problem, i created a script to flush the dns, 
+  and created a task in task scheduler to execute that script every minute indefinitely"
 
 Though that solution works, it causes other problems like:
 1. Flashing the terminal and losing focus
@@ -51,7 +52,7 @@ A much MUCH better solution
 
 ## Build instructions
 
-Run `scripts\build.cmd` and the resulting executable will be in the publish folder at the root of the repository
+Run `scripts/build.cmd` and the resulting executable will be in the publish folder at the root of the repository
 
 All relevant scripts will be in the publish folder too, to register the service, and to delete it
 
