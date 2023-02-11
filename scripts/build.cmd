@@ -30,7 +30,7 @@ ECHO.
 ECHO Copying files to a root publish directory
 ECHO.
 
-COPY /V /Y scripts\delete-service.cmd publish\delete-service.cmd
+COPY /V /Y scripts\*-service.cmd publish\
 ECHO.
 
 ECHO All relevent files are available in the publish directory at the root of the repository

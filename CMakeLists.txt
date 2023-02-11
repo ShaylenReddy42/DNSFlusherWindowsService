@@ -67,7 +67,3 @@ message(STATUS "Informational Version: ${INFORMATIONAL_VERSION}")
 configure_file(
 	"${CMAKE_SOURCE_DIR}/cmake/AssemblyInfo.cs.in"
 	"${CMAKE_SOURCE_DIR}/src/DNSFlusherWindowsService/Properties/AssemblyInfo.cs")
-
-configure_file(
-	"${CMAKE_SOURCE_DIR}/cmake/register-as-a-service.cmd.in"
-	"${CMAKE_SOURCE_DIR}/publish/register-as-a-service.cmd")

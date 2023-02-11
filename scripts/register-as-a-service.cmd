@@ -2,12 +2,11 @@
 
 CD "%~dp0"
 
-ECHO.
 ECHO Registering as a Windows Service
 ECHO.
 
 sc create "DNS Flusher" ^
-    binPath= "@CMAKE_SOURCE_DIR@/publish/DNSFlusherWindowsService.exe" ^
+    binPath= "%~dp0DNSFlusherWindowsService.exe" ^
     start= delayed-auto
 
 ECHO.
