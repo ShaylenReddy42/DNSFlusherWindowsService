@@ -9,6 +9,10 @@ IHost host = Host.CreateDefaultBuilder(args)
     })
     .ConfigureLogging(logging =>
     {
+        logging.ClearProviders();
+
+        logging.AddConsole();
+
         if (WindowsServiceHelpers.IsWindowsService())
         {
             logging
