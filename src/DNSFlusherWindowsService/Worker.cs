@@ -28,12 +28,12 @@ public class Worker : BackgroundService
             process.Start();
 
             process.StandardInput.WriteLine("ipconfig /flushdns");
-            process.StandardInput.Flush();
+            await process.StandardInput.FlushAsync();
             process.StandardInput.Close();
 
-            process.WaitForExit();
+            await process.WaitForExitAsync();
 
-            var output = process.StandardOutput.ReadToEnd();
+            var output = await process.StandardOutput.ReadToEndAsync();
 
             output = output[output.IndexOf("Windows IP Configuration") .. output.LastIndexOf('\n')].Trim();
 
