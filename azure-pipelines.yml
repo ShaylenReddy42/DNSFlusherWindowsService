@@ -16,9 +16,9 @@ steps:
   fetchDepth: 0
 
 - task: UseDotNet@2
-  displayName: 'Use .NET SDK 7.0.102'
+  displayName: 'Use .NET SDK 8.0.100'
   inputs:
-    version: 7.0.102
+    version: 8.0.100
     performMultiLevelLookup: true
 
 - task: CMake@1

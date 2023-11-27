@@ -48,8 +48,8 @@ A much MUCH better solution
 
 ## Required local setup to build and run
 
-* [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) 17.4 or later
-* .NET SDK [7.0.102](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
+* [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) 17.8.0 or later
+* .NET SDK [8.0.100](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 * [CMake](https://cmake.org/download/) 3.21.4 or later
 
 ## Build instructions

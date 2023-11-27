@@ -13,27 +13,31 @@ public class Worker : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        while (stoppingToken.IsCancellationRequested is false)
+        while (!stoppingToken.IsCancellationRequested)
         {
-            using var process = new Process();
-
-            process.StartInfo.FileName = "cmd.exe";
-
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.UseShellExecute = false;
-
-            process.StartInfo.RedirectStandardInput = true;
-            process.StartInfo.RedirectStandardOutput = true;
+            var processStartInfo = new ProcessStartInfo
+            {
+                FileName = "cmd.exe",
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true
+            };
+            
+            using var process = new Process
+            {
+                StartInfo = processStartInfo
+            };
 
             process.Start();
 
-            process.StandardInput.WriteLine("ipconfig /flushdns");
+            await process.StandardInput.WriteLineAsync("ipconfig /flushdns");
             await process.StandardInput.FlushAsync();
             process.StandardInput.Close();
 
-            await process.WaitForExitAsync();
+            await process.WaitForExitAsync(stoppingToken);
 
-            var output = await process.StandardOutput.ReadToEndAsync();
+            var output = await process.StandardOutput.ReadToEndAsync(stoppingToken);
 
             output = output[output.IndexOf("Windows IP Configuration") .. output.LastIndexOf('\n')].Trim();
 
